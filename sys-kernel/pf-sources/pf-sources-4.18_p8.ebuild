@@ -11,7 +11,7 @@ HOMEPAGE="
 	https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/linux
 "
 
-IUSE="+gentoo"
+IUSE=""
 
 # No 'experimental' USE flag provided, but we still want to use genpatches
 K_EXP_GENPATCHES_NOUSE="1"
