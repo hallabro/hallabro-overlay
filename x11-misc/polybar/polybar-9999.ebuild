@@ -16,7 +16,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
-IUSE="+alsa i3 mpd curl network"
+IUSE="+alsa i3 mpd curl network pulseaudio"
 
 RDEPEND="
         x11-base/xcb-proto
@@ -26,10 +26,11 @@ RDEPEND="
         x11-libs/xcb-util-image
 
         alsa? ( media-libs/alsa-lib )
+        curl? ( net-misc/curl )
         i3? ( dev-libs/jsoncpp || ( x11-wm/i3 x11-wm/i3-gaps ) )
         mpd? ( media-libs/libmpdclient )
-        curl? ( net-misc/curl )
         network? ( net-wireless/wireless-tools )
+        pulseaudio? ( media-sound/pulseaudio )
 "
 
 DEPEND="${RDEPEND}"
@@ -37,10 +38,11 @@ DEPEND="${RDEPEND}"
 src_configure() {
         local mycmakeargs=(
                 -DENABLE_ALSA="$(usex alsa)"
+                -DENABLE_CURL="$(usex curl)"
+                -DENABLE_I3="$(usex i3)"
                 -DENABLE_MPD="$(usex mpd)"
                 -DENABLE_NETWORK="$(usex network)"
-                -DENABLE_I3="$(usex i3)"
-                -DENABLE_CURL="$(usex curl)"
+                -DENABLE_PULSEAUDIO="$(usex pulseaudio)"
         )
         cmake-utils_src_configure
 }
