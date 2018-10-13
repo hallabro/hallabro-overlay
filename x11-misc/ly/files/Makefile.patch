@@ -1,0 +1,96 @@
+diff --git a/makefile b/makefile
+index bd572b7..7c0a2f1 100644
+--- a/makefile
++++ b/makefile
+@@ -1,13 +1,10 @@
+ NAME=ly
+-CC=gcc
+-#CC=gcc -O3
+-#CC=tcc
+-FLAGS=-std=c99 -pedantic -Wall -Werror=vla -Werror -g
+-FLAGS+=-DGIT_VERSION_STRING=\"$(shell git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g')\"
++CFLAGS+=-std=c99
++CFLAGS+=-DGIT_VERSION_STRING=\"$(shell git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g')\"
+ 
+ OS:=$(shell uname -s)
+ ifeq ($(OS),Linux)
+-	FLAGS+=-D_DEFAULT_SOURCE
++	CFLAGS+=-D_DEFAULT_SOURCE
+ endif
+ 
+ BIND=bin
+@@ -17,7 +14,7 @@ OBJD=obj
+ RESD=res
+ LANG=$(RESD)/lang
+ INCL=-I$(SRCD) -I$(SUBD)/termbox-next/src -I$(SUBD)/inih
+-LINK=-lm -lpam
++LDFLAGS+=-lm -lpam
+ 
+ SRCS=$(SRCD)/main.c
+ SRCS+=$(SRCD)/draw.c
+@@ -36,20 +33,17 @@ OBJS+=$(SUBD)/termbox-next/bin/termbox.a
+ all:$(BIND)/$(NAME)
+ 
+ $(OBJD)/%.o:%.c
+-	@echo "building source object $@"
+-	@mkdir -p $(@D)
+-	@$(CC) $(INCL) $(FLAGS) -c -o $@ $<
++	mkdir -p $(@D)
++	$(CC) $(INCL) $(CFLAGS) -c -o $@ $<
+ 
+ $(SUBD)/termbox-next/bin/termbox.a:
+-	@echo "building static object $@"
+-	@(cd $(SUBD)/termbox-next && $(MAKE))
++	(cd $(SUBD)/termbox-next && $(MAKE))
+ 
+ $(BIND)/$(NAME):$(OBJS)
+-	@echo "compiling $@"
+-	@mkdir -p $(BIND)
+-	@$(CC) $(INCL) $(FLAGS) -o $(BIND)/$(NAME) $(OBJS) $(LINK)
+-	@cp -r $(LANG) $(BIND)/lang
+-	@cp $(RESD)/config.ini $(BIND)
++	mkdir -p $(BIND)
++	$(CC) $(INCL) $(CFLAGS) -o $(BIND)/$(NAME) $(OBJS) $(LDFLAGS)
++	cp -r $(LANG) $(BIND)/lang
++	cp $(RESD)/config.ini $(BIND)
+ 
+ run:$(BIND)/$(NAME)
+ 	@cd ./$(BIND) && ./$(NAME)
+Submodule sub/termbox-next contains untracked content
+Submodule sub/termbox-next contains modified content
+diff --git a/sub/termbox-next/makefile b/sub/termbox-next/makefile
+index 4f6acc5..aa17f4b 100644
+--- a/sub/termbox-next/makefile
++++ b/sub/termbox-next/makefile
+@@ -1,10 +1,9 @@
+ NAME=termbox
+-CC=gcc
+-FLAGS=-std=c99 -pedantic -Wall -Werror -g
++CFLAGS+=-std=c99
+ 
+ OS:=$(shell uname -s)
+ ifeq ($(OS),Linux)
+-	FLAGS+=-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE
++	CFLAGS+=-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE
+ endif
+ 
+ BIND=bin
+@@ -25,14 +24,12 @@ OBJS:=$(patsubst $(SRCD)/%.c,$(OBJD)/$(SRCD)/%.o,$(SRCS))
+ all:$(BIND)/$(NAME).a
+ 
+ $(OBJD)/%.o:%.c
+-	@echo "building source object $@"
+-	@mkdir -p $(@D)
+-	@$(CC) $(INCL) $(FLAGS) -c -o $@ $<
++	mkdir -p $(@D)
++	$(CC) $(INCL) $(CFLAGS) -c -o $@ $<
+ 
+ $(BIND)/$(NAME).a:$(OBJS)
+-	@echo "compiling $@"
+-	@mkdir -p $(BIND)
+-	@ar rvs $(BIND)/$(NAME).a $(OBJS)
++	mkdir -p $(BIND)
++	ar rvs $(BIND)/$(NAME).a $(OBJS)
+ 
+ clean:
+ 	@echo "cleaning workspace"
