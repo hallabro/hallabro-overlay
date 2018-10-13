@@ -18,7 +18,7 @@ K_USEPV="yes"
 inherit kernel-2
 detect_version
 
-DESCRIPTION="Linux kernel fork that includes the pf-kernel patchset"
+DESCRIPTION="Linux kernel with the pf-kernel patchset"
 
 PF_URI="https://github.com/pfactum/pf-kernel/compare/v${PV/_p*/}...v${PV/_p*/}-pf${PV/*_p/}.diff -> ${P}.patch"
 SRC_URI="
