@@ -7,8 +7,6 @@ KEYWORDS="-* ~amd64 ~x86"
 
 HOMEPAGE="https://gitlab.com/post-factum/pf-kernel/wikis/README"
 
-IUSE=""
-
 K_NOSETEXTRAVERSION="don't_set_it"
 
 # Not supported by the Gentoo crew
@@ -21,10 +19,7 @@ detect_version
 DESCRIPTION="Linux kernel with the pf-kernel patchset"
 
 PF_URI="https://github.com/pfactum/pf-kernel/compare/v${PV/_p*/}...v${PV/_p*/}-pf${PV/*_p/}.diff -> ${P}.patch"
-SRC_URI="
-	${KERNEL_URI}
-	${PF_URI}
-"
+SRC_URI="${KERNEL_URI} ${PF_URI}"
 
 KV_FULL="${PVR}-pf"
 S="${WORKDIR}/linux-${KV_FULL}"
