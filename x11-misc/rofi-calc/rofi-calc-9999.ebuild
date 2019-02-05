@@ -10,7 +10,6 @@ DESCRIPTION="Do live calculations in rofi!"
 HOMEPAGE="https://github.com/svenstaro/rofi-calc"
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/svenstaro/rofi-calc.git"
-# PATCHES="${FILESDIR}/Makefile.patch"
 
 LICENSE="MIT"
 SLOT="0"
