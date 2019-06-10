@@ -24,7 +24,7 @@ EGO_VENDOR=(
 	#"gopkg.in/yaml.v2 287cf08546ab github.com/go-yaml/yaml"
 )
 
-inherit bash-completion-r1 golang-vcs-snapshot-r1
+inherit bash-completion-r1 golang-vcs-snapshot
 
 DESCRIPTION="A general-purpose command-line fuzzy finder"
 HOMEPAGE="https://github.com/junegunn/fzf"
