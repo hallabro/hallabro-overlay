@@ -15,17 +15,3 @@ SLOT="0"
 
 RDEPEND="dev-python/jinja dev-python/pyyaml"
 DEPEND=""
-
-src_prepare() {
-	# use versioned doc path
-	#sed -i "s|share/doc/ranger|share/doc/${PF}|" setup.py doc/ranger.1 || die
-
-	distutils-r1_src_prepare
-}
-
-pkg_postinst() {
-	if [[ -z ${REPLACING_VERSIONS} ]]; then
-		elog "Ranger has many optional dependencies to support enhanced file previews."
-		elog "See the README or homepage for more details."
-	fi
-}
