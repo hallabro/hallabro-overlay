@@ -1,6 +1,5 @@
-# Copyright Robin Hallabro-Kokko <robin@hallabro.nu>
-# Distributed under the terms of the GNU General Public License v3 or later
-# $Header: $
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
@@ -13,15 +12,15 @@ EGIT_REPO_URI="https://github.com/svenstaro/rofi-calc.git"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="
-  >=x11-misc/rofi-1.5
-  >=sci-libs/libqalculate-2.0
+	>=x11-misc/rofi-1.5
+	>=sci-libs/libqalculate-2.0
 "
 
 src_prepare() {
-  default
-  eautoreconf -i
+	default
+	eautoreconf -i
 }
