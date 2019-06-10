@@ -3,7 +3,7 @@
 
 EAPI=6
 ETYPE="sources"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="-* ~amd64 ~ppc ~ppc64 ~x86"
 
 HOMEPAGE="
 	https://gitlab.com/post-factum/pf-kernel/wikis/README
