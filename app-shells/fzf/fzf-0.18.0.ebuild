@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -35,9 +35,8 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86" # Untested: arm arm64 x86
-IUSE="debug pie tmux"
-
-RDEPEND="tmux? ( app-misc/tmux )"
+IUSE="debug pie"
+RDEPEND=""
 
 DOCS=( CHANGELOG.md README.md )
 QA_PRESTRIPPED="usr/bin/.*"
@@ -86,8 +85,6 @@ src_install() {
 	insinto /usr/share/zsh/site-contrib/
 	newins shell/key-bindings.zsh fzf.zsh
 
-	if use tmux; then
-		dobin bin/fzf-tmux
-		doman man/man1/fzf-tmux.1
-	fi
+	dobin bin/fzf-tmux
+	doman man/man1/fzf-tmux.1
 }
