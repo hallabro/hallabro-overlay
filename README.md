@@ -1,3 +1,5 @@
+![Ebuild validation](https://github.com/hallabro/hallabro-overlay/workflows/Validate/badge.svg)
+
 hallabro-overlay
 ================
 
