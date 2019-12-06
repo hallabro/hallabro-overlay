@@ -1,0 +1,10 @@
+name: Validate
+on: [push, pull_request]
+jobs:
+  ebuild-validate:
+    name: Validate ebuilds
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Lint ebuilds
+      run: docker run -tv ${PWD}:/mnt chaoslab/repoman -xiIdv
