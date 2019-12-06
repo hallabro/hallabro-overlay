@@ -1,7 +1,6 @@
 # Copyright 2019 Haelwenn (lanodan) Monnier <contact@hacktivis.me>
 # Modifications by Robin Hallabro-Kokko <robin@hallabro.nu>
 # Distributed under the terms of the GNU General Public License v2
-
 EAPI=7
 
 PYTHON_COMPAT=( python2_6 python3_{4,5,6} )
@@ -49,4 +48,3 @@ src_install() {
 
 	save_config searx/settings.yml
 }
-
