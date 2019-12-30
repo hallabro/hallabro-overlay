@@ -2,15 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit eutils git-r3 desktop
+inherit eutils desktop
 
 DESCRIPTION="Simple terminal implementation for X with Xresources support and other patches"
 HOMEPAGE="https://github.com/gnotclub/xst"
-EGIT_REPO_URI="${HOMEPAGE}"
+SRC_URI="https://github.com/gnotclub/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 SLOT="0"
 LICENSE="MIT-with-advertising"
-KEYWORDS=""
+KEYWORDS="~amd64"
 
 RDEPEND="
 	>=sys-libs/ncurses-6.0

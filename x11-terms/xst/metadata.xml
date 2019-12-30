@@ -5,4 +5,8 @@
 		<email>robin@hallabro.nu</email>
 		<name>Robin Hallabro-Kokko</name>
 	</maintainer>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
 </pkgmetadata>
