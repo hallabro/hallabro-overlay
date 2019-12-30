@@ -30,7 +30,6 @@ src_install() {
 	make_desktop_entry ${PN} xst utilities-terminal 'System;TerminalEmulator;' ''
 }
 
-
 pkg_postinst() {
 	if ! [[ "${REPLACING_VERSIONS}" ]]; then
 		elog "Please ensure a usable font is installed, like"
