@@ -1,0 +1,11 @@
+--- configure.ac.orig	2020-02-21 19:08:18.784501641 +0100
++++ configure.ac	2020-02-21 19:13:00.692490080 +0100
+@@ -10,7 +10,7 @@
+ AC_INIT([licenseutils],[0.0.9],[http://sv.nongnu.org/bugs/?group=licenseutils])
+ AC_CONFIG_AUX_DIR([build-aux])
+ AM_INIT_AUTOMAKE
+-AC_PREREQ(2.60)
++AC_PREREQ([2.63])
+ AM_CONFIG_HEADER(config.h:config.in)
+ AC_CONFIG_SRCDIR([src/main.c])
+ 
