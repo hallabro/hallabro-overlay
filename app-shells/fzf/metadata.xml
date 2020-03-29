@@ -5,4 +5,8 @@
 		<email>robin@hallabro.nu</email>
 		<name>Robin Hallabro-Kokko</name>
 	</maintainer>
+    <use>
+        <flag name="tmux">Installs the <pkg>app-misc/tmux</pkg>
+        wrapper script to start fzf in a tmux pane.</flag>
+    </use>
 </pkgmetadata>

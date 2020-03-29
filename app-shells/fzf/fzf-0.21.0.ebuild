@@ -3,10 +3,9 @@
 
 EAPI=7
 
-# Change this when you update the ebuild
-GIT_COMMIT="${PV}"
-EGO_PN="github.com/junegunn/${PN}"
+inherit bash-completion-r1 go-module
 
+EGO_PN="github.com/junegunn/${PN}"
 EGO_SUM=(
 		"github.com/DATA-DOG/go-sqlmock v1.3.3/go.mod"
 		"github.com/gdamore/encoding v1.0.0"
@@ -54,15 +53,15 @@ EGO_SUM=(
 		"golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod"
 )
 
-inherit bash-completion-r1 golang-vcs-snapshot
+go-module_set_globals
 
 DESCRIPTION="A general-purpose command-line fuzzy finder"
 HOMEPAGE="https://github.com/junegunn/fzf"
-ARCHIVE_URI="https://${EGO_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI="${ARCHIVE_URI} ${EGO_VENDOR_URI}"
-RESTRICT="mirror network-sandbox"
 
-LICENSE="MIT"
+SRC_URI="https://${EGO_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
+		 ${EGO_SUM_SRC_URI}"
+
+LICENSE="MIT BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86" # Untested: arm arm64 x86
 IUSE="debug tmux"
@@ -70,26 +69,9 @@ IUSE="debug tmux"
 RDEPEND="tmux? ( app-misc/tmux )"
 
 DOCS=( CHANGELOG.md README.md )
-QA_PRESTRIPPED="usr/bin/.*"
-
-G="${WORKDIR}/${P}"
-S="${G}/src/${EGO_PN}"
 
 src_compile() {
-	export GOPATH="${G}"
-	local myldflags=(
-		"$(usex !debug '-s -w' '')"
-		-X "main.revision=${GIT_COMMIT:0:7}"
-	)
-	local mygoargs=(
-		-v
-		#"-buildmode=$(usex pie pie exe)"
-		"-buildmode=pie"
-		"-asmflags=all=-trimpath=${S}"
-		"-gcflags=all=-trimpath=${S}"
-		-ldflags "${myldflags[*]}"
-	)
-	go build "${mygoargs[@]}" || die
+	go build || die
 }
 
 src_test() {
@@ -105,7 +87,6 @@ src_install() {
 
 	insinto /etc/bash/bashrc.d
 	newins shell/key-bindings.bash fzf.bash
-	echo 'complete -o default -F _fzf_opts_completion fzf' >> shell/completion.bash # QA-workaround
 	newbashcomp shell/completion.bash "${PN}"
 
 	insinto /usr/share/nvim/runtime/plugin
@@ -117,12 +98,13 @@ src_install() {
 
 	insinto /usr/share/zsh/site-functions
 	newins shell/completion.zsh _fzf
-	insinto /usr/share/zsh/site-contrib/
+
+	insinto /usr/share/zsh/site-contrib
 	newins shell/key-bindings.zsh fzf.zsh
 
 	if use tmux; then
-		dobin bin/"${PN}"-tmux
-		bashcomp_alias "${PN}" "${PN}"-tmux
-		doman man/man1/"${PN}"-tmux.1
+		dobin bin/fzf-tmux
+		bashcomp_alias fzf fzf-tmux
+		doman man/man1/fzf-tmux.1
 	fi
 }
