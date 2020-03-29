@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools eutils git-r3
+inherit autotools eutils
 
 DESCRIPTION="licenseutils is for creating copyright and license notices."
 HOMEPAGE="https://savannah.nongnu.org/p/licenseutils"
@@ -23,24 +23,9 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND=">=sys-devel/autoconf-2.63"
 
-src_unpack() {
-	default
-
-	EGIT_REPO_URI="https://git.savannah.gnu.org/r/gnulib.git" \
-		EGIT_CHECKOUT_DIR="${WORKDIR}/gnulib" \
-		git-r3_src_unpack
-}
-
 src_prepare() {
-	eapply -p0 "${FILESDIR}"/${PN}-0.0.9-autotools.patch
-
-	local bootstrap_opts=(
-		--gnulib-srcdir=../gnulib
-		--copy
-		--skip-po
-	)
-
-	sh ./bootstrap "${bootstrap_opts[@]}" || die
+	eapply -p0 "${FILESDIR}/${PN}-0.0.9-autotools.patch"
+	eapply -p0 "${FILESDIR}/${PN}-0.0.9-fix-gnulib-fseterr.patch"
 
 	default
 	eautoreconf
