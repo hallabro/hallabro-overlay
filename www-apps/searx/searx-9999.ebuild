@@ -3,7 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 EAPI=7
 
-PYTHON_COMPAT=( python2_6 python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit savedconfig distutils-r1 git-r3
 
