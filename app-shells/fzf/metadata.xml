@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<maintainer type="person">
-		<email>robin@hallabro.nu</email>
-		<name>Robin Hallabro-Kokko</name>
-	</maintainer>
-    <use>
-        <flag name="tmux">Installs the <pkg>app-misc/tmux</pkg>
-        wrapper script to start fzf in a tmux pane.</flag>
-    </use>
+  <maintainer type="person">
+    <email>robin@hallabro.nu</email>
+    <name>Robin Hallabro-Kokko</name>
+  </maintainer>
+  <use>
+    <flag name="tmux">Installs the <pkg>app-misc/tmux</pkg>
+    wrapper script to start fzf in a tmux pane.</flag>
+  </use>
 </pkgmetadata>
